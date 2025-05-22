@@ -35,21 +35,20 @@ describe("CardComponent test", () => {
     const onClick = vi.fn();
 
     render(<Card {...props} onClick={onClick} />);
-
     const button = screen.getByRole("button");
-
     await fireEvent.click(button);
+
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   test("disabledをtureにするとボタンがクリック出来なくなること", async () => {
     const onClick = vi.fn();
+    const isDisalbed = true;
 
-    render(<Card {...props} onClick={onClick} disabled />);
-
+    render(<Card {...props} onClick={onClick} disabled={isDisalbed} />);
     const button = screen.getByRole("button");
-
     await fireEvent.click(button);
+
     expect(onClick).toHaveBeenCalledTimes(0);
   });
 });
