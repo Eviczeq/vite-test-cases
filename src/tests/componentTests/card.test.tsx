@@ -45,7 +45,7 @@ describe("CardComponent test", () => {
   test("disabledをtureにするとボタンがクリック出来なくなること", async () => {
     const onClick = vi.fn();
 
-    render(<Card {...props} disabled={true} />);
+    render(<Card {...props} onClick={onClick} disabled />);
 
     const button = screen.getByRole("button");
 
