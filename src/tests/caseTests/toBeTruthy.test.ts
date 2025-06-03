@@ -1,5 +1,9 @@
 import { expect, describe, test } from "vitest";
 
+const sum = (a: number, b: number) => {
+  return a + b;
+};
+
 describe("toBeTruthy test", () => {
   const data = {
     name: "test",
@@ -18,5 +22,8 @@ describe("toBeTruthy test", () => {
 
   test("isDisabledがtrue", () => {
     expect(data.isDisabled).toBeTruthy();
+  });
+  test("sum関数が正しい値を返す", () => {
+    expect(sum(1, 2)).toBeTruthy();
   });
 });

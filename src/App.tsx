@@ -1,11 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import "./App.css";
+import { getUser } from "./api/getUser";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const data = await getUser(11);
+        console.log(data);
+      } catch (error) {
+        console.error("Failed to fetch user:", error);
+      }
+    };
 
+    fetchUser();
+  }, []);
   return (
     <>
       <div>
@@ -29,7 +41,7 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
