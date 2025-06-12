@@ -13,22 +13,22 @@ describe("CardComponent test", () => {
   };
   test("titleがレンダリングできるか", () => {
     render(<Card {...props} />);
-    expect(screen.getByText("title")).toBeDefined();
+    expect(screen.getByText("title"));
   });
 
   test("descriptionがレンダリングできるか", () => {
     render(<Card {...props} />);
-    expect(screen.getByText("description")).toBeDefined();
+    expect(screen.getByText("description"));
   });
 
   test("imageUrlがレンダリングできるか", () => {
     render(<Card {...props} />);
-    expect(screen.getByRole("img")).toBeDefined();
+    expect(screen.getByRole("img"));
   });
 
   test("buttonがレンダリングできるか", () => {
     render(<Card {...props} />);
-    expect(screen.getByRole("button")).toBeDefined();
+    expect(screen.getByRole("button"));
   });
 
   test("buttonがクリックできるか", async () => {
@@ -43,9 +43,9 @@ describe("CardComponent test", () => {
 
   test("disabledをtureにするとボタンがクリック出来なくなること", async () => {
     const onClick = vi.fn();
-    const isDisalbed = true;
+    const isDisabled = true;
 
-    render(<Card {...props} onClick={onClick} disabled={isDisalbed} />);
+    render(<Card {...props} onClick={onClick} disabled={isDisabled} />);
     const button = screen.getByRole("button");
     await fireEvent.click(button);
 
