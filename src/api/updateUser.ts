@@ -8,6 +8,6 @@ export const updateUser = async (
     hobby: string;
   }
 ) => {
-  const response = await axios.put(`/user/${userId}`, userData); // ✅ match MSW
+  const response = await axios.put(`/user/${userId}`, userData);
   return response.data;
 };

@@ -2,7 +2,7 @@ import { expect, describe, test } from "vitest";
 
 const getUserData = async () => {
   try {
-    throw new Error("エラーが発生しました");
+    return "";
   } catch {
     return null;
   }
@@ -11,7 +11,7 @@ const getUserData = async () => {
 describe("toBeFalsy test", () => {
   test("getUserDataはnullを返す", async () => {
     const result = await getUserData();
-    expect(result).toBeFalsy();
+    expect(result?.length).toBeFalsy();
   });
   const data = {
     name: "test",
