@@ -38,16 +38,13 @@ describe("Button test", () => {
     expect(screen.getByText("Button"));
   });
 
-  test("タブでフォーカスできる", async () => {
+  test("タブでフォーカスできる,エンターキーでクリックできる", async () => {
     render(<Button label="Button" onClick={handleClick} />);
     const button = screen.getByRole("button");
+
     await user.tab();
     expect(button).toHaveFocus();
-  });
 
-  test("エンターキーでクリックできる", async () => {
-    render(<Button label="Button" onClick={handleClick} />);
-    await user.tab();
     await user.keyboard("{Enter}");
     expect(handleClick).toBeCalled();
   });
