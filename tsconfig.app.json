@@ -23,5 +23,5 @@
     "noUncheckedSideEffectImports": true,
     "types": ["vitest", "@testing-library/jest-dom"]
   },
-  "include": ["src", "vitest-setup.ts"]
+  "include": ["src", "vitest.setup.ts"]
 }
