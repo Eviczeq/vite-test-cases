@@ -1,7 +1,7 @@
 export type ButtonProps = {
   label: string;
   onClick: () => void;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 const Button = ({ label, onClick, disabled }: ButtonProps) => {

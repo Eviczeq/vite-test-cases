@@ -1,44 +1,54 @@
-import { describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
-import type { ButtonProps } from "../../components/Button";
 import Button from "../../components/Button";
 
 describe("Button test", () => {
-  const props: ButtonProps = {
-    label: "Button",
-    onClick: () => console.log("Button Clicked"),
-    disabled: false,
-  };
   const user = userEvent.setup();
+  const handleClick = vi.fn();
+  beforeEach(() => {
+    handleClick.mockClear();
+  });
 
   test("Buttonがレンダリングできる", () => {
-    render(<Button {...props} />);
+    render(<Button label="Button" onClick={handleClick} />);
     expect(screen.getByRole("button"));
   });
 
   test("Buttonがクリックできる", async () => {
-    const onClick = vi.fn();
-    render(<Button {...props} onClick={onClick} />);
+    render(<Button label="Button" onClick={handleClick} />);
     const button = screen.getByRole("button");
 
     await user.click(button);
 
-    expect(onClick).toBeCalledTimes(1);
+    expect(handleClick).toBeCalledTimes(1);
   });
 
   test("Buttonがdisabledのときクリックできない", async () => {
-    render(<Button {...props} disabled />);
+    render(<Button label="Button" onClick={handleClick} disabled={true} />);
     const button = screen.getByRole("button");
-    const onClick = vi.fn();
 
     await user.click(button);
 
-    expect(onClick).toBeCalledTimes(0);
+    expect(handleClick).not.toBeCalled();
   });
 
   test("Buttonのlabelが表示される", () => {
-    render(<Button {...props} />);
+    render(<Button label="Button" onClick={handleClick} />);
     expect(screen.getByText("Button"));
+  });
+
+  test("タブでフォーカスできる", async () => {
+    render(<Button label="Button" onClick={handleClick} />);
+    const button = screen.getByRole("button");
+    await user.tab();
+    expect(button).toHaveFocus();
+  });
+
+  test("エンターキーでクリックできる", async () => {
+    render(<Button label="Button" onClick={handleClick} />);
+    await user.tab();
+    await user.keyboard("{Enter}");
+    expect(handleClick).toBeCalled();
   });
 });
