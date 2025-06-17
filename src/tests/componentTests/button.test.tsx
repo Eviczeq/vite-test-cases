@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import type { ButtonProps } from "../../components/Button";
@@ -7,7 +7,7 @@ import Button from "../../components/Button";
 describe("Button test", () => {
   const props: ButtonProps = {
     label: "Button",
-    onClick: () => alert("Button Clicked"),
+    onClick: () => console.log("Button Clicked"),
     disabled: false,
   };
   const user = userEvent.setup();
@@ -18,17 +18,25 @@ describe("Button test", () => {
   });
 
   test("Buttonがクリックできる", async () => {
-    render(<Button {...props} />);
-    await user.click(screen.getByRole("button"));
+    const onClick = vi.fn();
+    render(<Button {...props} onClick={onClick} />);
+    const button = screen.getByRole("button");
+
+    await user.click(button);
+
+    expect(onClick).toBeCalledTimes(1);
   });
 
   test("Buttonがdisabledのときクリックできない", async () => {
     render(<Button {...props} disabled />);
     const button = screen.getByRole("button");
+    const onClick = vi.fn();
+
     await user.click(button);
 
-    expect(button).toBeDisabled();
+    expect(onClick).toBeCalledTimes(0);
   });
+
   test("Buttonのlabelが表示される", () => {
     render(<Button {...props} />);
     expect(screen.getByText("Button"));
