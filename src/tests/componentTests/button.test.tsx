@@ -2,6 +2,7 @@ import { describe, expect, test } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import type { ButtonProps } from "../../components/Button";
+import Button from "../../components/Button";
 
 describe("Button test", () => {
   const props: ButtonProps = {
@@ -12,25 +13,24 @@ describe("Button test", () => {
   const user = userEvent.setup();
 
   test("Buttonがレンダリングできる", () => {
-    render(<button {...props} />);
+    render(<Button {...props} />);
     expect(screen.getByRole("button"));
   });
 
   test("Buttonがクリックできる", async () => {
-    render(<button {...props} />);
+    render(<Button {...props} />);
     await user.click(screen.getByRole("button"));
   });
 
   test("Buttonがdisabledのときクリックできない", async () => {
-    render(<button {...props} disabled />);
+    render(<Button {...props} disabled />);
     const button = screen.getByRole("button");
     await user.click(button);
 
     expect(button).toBeDisabled();
   });
   test("Buttonのlabelが表示される", () => {
-    render(<button {...props} />);
-    const button = screen.getByRole("button");
-    expect(button).toHaveAttribute("label", "Button");
+    render(<Button {...props} />);
+    expect(screen.getByText("Button"));
   });
 });
