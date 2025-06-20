@@ -1,14 +1,10 @@
-import { beforeEach, describe, expect, test, vi } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "@testing-library/react";
 import Button from "../../components/Button";
 
 describe("Button test", () => {
-  const user = userEvent.setup();
   const handleClick = vi.fn();
-  beforeEach(() => {
-    handleClick.mockClear();
-  });
 
   test("Buttonがレンダリングできる", () => {
     render(<Button label="Button" onClick={handleClick} />);
@@ -16,6 +12,8 @@ describe("Button test", () => {
   });
 
   test("Buttonがクリックできる", async () => {
+    const user = userEvent.setup();
+
     render(<Button label="Button" onClick={handleClick} />);
     const button = screen.getByRole("button");
 
@@ -27,6 +25,7 @@ describe("Button test", () => {
   test("Buttonがdisabledのときクリックできない", async () => {
     render(<Button label="Button" onClick={handleClick} disabled={true} />);
     const button = screen.getByRole("button");
+    const user = userEvent.setup();
 
     await user.click(button);
 
@@ -41,6 +40,7 @@ describe("Button test", () => {
   test("タブでフォーカスできる,エンターキーでクリックできる", async () => {
     render(<Button label="Button" onClick={handleClick} />);
     const button = screen.getByRole("button");
+    const user = userEvent.setup();
 
     await user.tab();
     expect(button).toHaveFocus();
