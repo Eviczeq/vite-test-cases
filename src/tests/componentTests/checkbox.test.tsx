@@ -65,7 +65,7 @@ describe("Checkbox test", () => {
     await user.tab();
     expect(element).toHaveFocus();
 
-    await user.keyboard(" ");
+    await user.keyboard("[Space]");
     expect(element).toBeChecked();
   });
 });

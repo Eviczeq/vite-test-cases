@@ -36,14 +36,14 @@ describe("Radio test", () => {
     expect(radio).not.toBeChecked();
   });
 
-  //   test("タブでフォーカスできる,エンターキーでクリックできる", async () => {
-  //     render(<Radio {...props} name="group" />);
-  //     const radio = screen.getByRole("radio");
+  test("タブでフォーカスできる,Spaceキーでクリックできる", async () => {
+    render(<Radio {...props} name="group" />);
+    const radio = screen.getByRole("radio");
 
-  //     await user.tab();
-  //     expect(radio).toHaveFocus();
+    await user.tab();
+    expect(radio).toHaveFocus();
 
-  //     await user.keyboard("{Space}");
-  //     expect(radio).toBeChecked();
-  //   });
+    await user.keyboard("[Space]");
+    expect(radio).toBeChecked();
+  });
 });
