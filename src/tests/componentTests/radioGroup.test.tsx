@@ -36,11 +36,11 @@ describe("RadioGroup test", () => {
     render(<Template />);
     const radio = screen.getByRole("radio", { name: "男性" });
     const valueElement = screen.getByTestId("selected-value");
-    expect(valueElement).toHaveTextContent("");
+    expect(valueElement.textContent).toBe("");
     await user.click(radio);
 
     expect(radio).toHaveAttribute("value", "male");
-    expect(valueElement).toHaveTextContent("male");
+    expect(valueElement.textContent).toBe("male");
   });
 
   test("Disableの時、クリックできない", async () => {
@@ -49,19 +49,34 @@ describe("RadioGroup test", () => {
     const radio = screen.getByRole("radio", { name: "男性" });
     const valueElement = screen.getByTestId("selected-value");
     await user.click(radio);
-    expect(valueElement).toHaveTextContent("");
+    expect(valueElement.textContent).toBe("");
   });
   test("タブでフォーカスできる,Spaceキーでクリックできる", async () => {
     const user = userEvent.setup();
     render(<Template />);
     const radio = screen.getByRole("radio", { name: "男性" });
     const valueElement = screen.getByTestId("selected-value");
-    expect(valueElement).toHaveTextContent("");
+    expect(valueElement.textContent).toBe("");
 
     await user.tab();
     expect(radio).toHaveFocus();
 
     await user.keyboard("[Space]");
-    expect(valueElement).toHaveTextContent("male");
+    expect(valueElement.textContent).toBe("male");
+  });
+  test("Arrowキーで選択できる", async () => {
+    const user = userEvent.setup();
+    render(<Template />);
+    const radioMale = screen.getByRole("radio", { name: "男性" });
+    const radioFemale = screen.getByRole("radio", { name: "女性" });
+    const valueElement = screen.getByTestId("selected-value");
+    expect(valueElement.textContent).toBe("");
+
+    await user.tab();
+    expect(radioMale).toHaveFocus();
+
+    await user.keyboard("[ArrowRight]");
+    expect(radioFemale).toHaveFocus();
+    expect(valueElement.textContent).toBe("female");
   });
 });
