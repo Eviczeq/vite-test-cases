@@ -45,4 +45,23 @@ export const handlers = [
 
     return HttpResponse.json(updatedUser, { status: 200 });
   }),
+  http.post("/user", async ({ request }) => {
+    const data = (await request.json()) as { userName: string; email: string };
+
+    if (!data.userName || !data.email) {
+      return HttpResponse.json(
+        { message: "NODATA" },
+        {
+          status: 400,
+        }
+      );
+    }
+    return HttpResponse.json(
+      {
+        message: "User created",
+        data: data,
+      },
+      { status: 201 }
+    );
+  }),
 ];

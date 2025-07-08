@@ -6,7 +6,7 @@ export type ButtonProps = {
 
 const Button = ({ label, onClick, disabled }: ButtonProps) => {
   return (
-    <button onClick={onClick} disabled={disabled}>
+    <button onClick={onClick} disabled={disabled} type="button">
       {label}
     </button>
   );

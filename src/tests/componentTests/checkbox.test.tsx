@@ -7,7 +7,6 @@ import { useState } from "react";
 
 const props: CheckboxProps = {
   label: "label",
-  id: "id",
   onChange: vi.fn(),
   checked: false,
   disabled: false,
@@ -16,9 +15,7 @@ const props: CheckboxProps = {
 describe("Checkbox test", () => {
   const Element = () => {
     const [checked, setChecked] = useState(false);
-    return (
-      <Checkbox label="label" id="id" onChange={setChecked} checked={checked} />
-    );
+    return <Checkbox label="label" onChange={setChecked} checked={checked} />;
   };
 
   test("Checkboxがレンダリングできる", () => {

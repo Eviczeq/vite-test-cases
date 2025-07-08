@@ -1,7 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
+import Register from "./pages/register/index.tsx";
 
 const enableMocking = async () => {
   const { worker } = await import("./msw/browser.ts");
@@ -10,7 +9,7 @@ const enableMocking = async () => {
 enableMocking().then(() => {
   createRoot(document.getElementById("root")!).render(
     <StrictMode>
-      <App />
+      <Register />
     </StrictMode>
   );
 });
