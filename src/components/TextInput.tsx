@@ -1,26 +1,22 @@
+import type { UseFormRegisterReturn } from "react-hook-form";
+
 export type TextInputProps = {
-  name: string;
-  onChange: (value: string) => void;
+  register: UseFormRegisterReturn;
   placeholder: string;
-  value: string;
   disabled?: boolean;
 };
 
 export const TextInput = ({
-  name,
-  onChange,
+  register,
   placeholder,
-  value,
   disabled = false,
 }: TextInputProps) => {
   return (
     <input
       type="text"
-      name={name}
       placeholder={placeholder}
-      value={value}
+      {...register}
       disabled={disabled}
-      onChange={(e) => onChange(e.target.value)}
     />
   );
 };
