@@ -11,6 +11,15 @@ const dirname =
     : path.dirname(fileURLToPath(import.meta.url));
 
 export default defineWorkspace([
+  {
+    test: {
+      name: "vitest",
+      globals: true,
+      environment: "node",
+      include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+      setupFiles: ["./vitest.setup.ts"],
+    },
+  },
   // This is the path to your existing Vitest config file
   "./vitest.config.ts",
   {
