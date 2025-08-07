@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { TextInput } from "../../../../components/TextInput";
 import type { UseFormReturn } from "react-hook-form";
 import type { FormType } from "./schema";
